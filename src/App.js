@@ -13,6 +13,8 @@ class App extends Component {
       searchField: ''
     }
 
+    // this.handleChange = this.handleChange.bind(this); -> solved with arrow in the function handleChange
+
   }
 
   componentDidMount() {
@@ -22,6 +24,11 @@ class App extends Component {
       // set the response from api to our state monsters
       .then(users => this.setState({ monsters: users}))
   }
+
+  handleChange = (e) => {
+    this.setState({searchField: e.target.value})
+  }
+
 
   render() {
 
@@ -33,10 +40,11 @@ class App extends Component {
     return (
       <div className="App">
         {/* search bar */}
-        <SearchBox placeholder='Search Monsters' handleChange={e => this.setState({ searchField: e.target.value })} />
+        <SearchBox placeholder='Search Monsters' handleChange={this.handleChange} />
         {/* card lists with monsters */}
         <CardList monsters={ filteredMonsters }/> 
       </div>
+      
     );
   }
 }
